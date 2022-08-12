@@ -9,7 +9,7 @@ export default class ChangeLogGeneratorService {
 
     public async GenerateChangeLogWithUrlYaml(request: ChangeLogRequestDTO): Promise<any> {
 
-        let changeLogViewOutputList = await this._versionCompareService.compareWithUrl(request);
+        let changeLogViewOutputList = await this._versionCompareService.compare(request);
         
         return {changesLog : changeLogViewOutputList};
     }
