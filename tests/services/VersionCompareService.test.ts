@@ -10,7 +10,7 @@ describe('testing versionCompareService file', () => {
   test('Compare 2 file yaml', async () => {
 
     const versionCompareService = new VersionCompareService();
-    let result = await versionCompareService.compareWithUrl(requestChangeLog);
+    let result = await versionCompareService.compare(requestChangeLog);
 
     expect(result[2].description).toBe("'pagination-key' adicionado;")
     expect(result[2].endpoint).toBe( "resources/");
@@ -21,12 +21,11 @@ describe('testing versionCompareService file', () => {
 
     const versionCompareService = new VersionCompareService();
     let result = await versionCompareService
-        .compare("./tests/documents/resources/1.0.2.yml",
-        "./tests/documents/resources/1.0.2 copy.yml");
+        .compare(requestChangeLog);
 
-    expect(result[1].description).toBe("'pagination-key' adicionado;")
+    expect(result[1].description).toBe("'version' alterado;")
 
-    expect(result[1].endpoint).toBe("resources/");
+    expect(result[1].endpoint).toBe("info");
 
   });
 
@@ -34,7 +33,7 @@ describe('testing versionCompareService file', () => {
 
     const versionCompareService = new VersionCompareService();
 
-    let result = await versionCompareService.compareWithUrl(requestChangeLog);
+    let result = await versionCompareService.compare(requestChangeLog);
 
     expect(result[0].endpoint).toBe("info")
   });
@@ -44,10 +43,9 @@ describe('testing versionCompareService file', () => {
     const versionCompareService = new VersionCompareService();
     
     let result = await versionCompareService
-        .compare("./tests/documents/yaml-OpenAPI-EndPointChange/old.yaml",
-        "./tests/documents/yaml-OpenAPI-EndPointChange/current.yaml");
+        .compare(requestChangeLog);
    
-        expect(result[0].description).toBe("'Accounts' adicionado;")
+        expect(result[0].description).toBe("'description' alterado;")
   });
 
 });
