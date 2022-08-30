@@ -1,31 +1,15 @@
-
 import SwaggerDereferencerService from "../../src/services/SwaggerDereferencerService";
-import * as fs from 'fs';
+import ChangeLogRequestDTO from "../../src/dtos/ChangeLogRequestDTO";
 
 describe('testing dereferenced file generation', () => {
-  test('should generate json file', () => {
-    let objResult = SwaggerDereferencerService.dereference("tests/documents/yaml-OpenAPI/current.yaml")
-    objResult.then(x=>{
-      expect(x).toBe(true);
-    })
-   
-  });
 
-  test('should generate yaml file', () => {
-    jest.useFakeTimers();
-    SwaggerDereferencerService.dereference("tests/documents/yaml-OpenAPI/current.yaml")
-    setTimeout(() => {
-      expect(fs.existsSync("tests/documents/yaml-OpenAPI/dereferenced_files/current.yaml")).toBe(true);
-    },
-      5000);
-  });
+  let requestChangeLog = new ChangeLogRequestDTO();
+  requestChangeLog.urlOld = "https://raw.githubusercontent.com/Sensedia/draft-openapi/main/swagger-apis/resources/1.0.2.yml";
+  requestChangeLog.urlCurrent = "https://raw.githubusercontent.com/Sensedia/draft-openapi/main/swagger-apis/resources/2.0.0.yml";
 
-  test('should generate yaml file', () => {
-    jest.useFakeTimers();
-    SwaggerDereferencerService.dereference("tests/documents/yaml-OpenAPI/current.yaml")
-    setTimeout(() => {
-      expect(fs.existsSync("tests/documents/yaml-OpenAPI/dereferenced_files/current.yaml")).toBe(true);
-    },
-      5000);
-  });
-});
+  test('should dereference the spec', async () => {
+    let objResult = await SwaggerDereferencerService.dereference("https://raw.githubusercontent.com/Sensedia/draft-openapi/main/swagger-apis/resources/2.0.0.yml")
+    let objString = JSON.stringify(objResult);
+    expect(objString.search(/(\$ref)/g)).toBe(-1)
+  })
+})

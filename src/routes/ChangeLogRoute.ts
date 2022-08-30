@@ -1,5 +1,4 @@
 import express, { Router } from 'express'
-import ChangeLogRequestDTO from 'src/dtos/ChangeLogRequestDTO';
 import HttpStatusCode from '../constants/HttpStatusCode';
 import ChangeLogGeneratorService from "../services/ChangeLogGeneratorService";
 import { RetornoRequest } from '../utils/retornoRequest';

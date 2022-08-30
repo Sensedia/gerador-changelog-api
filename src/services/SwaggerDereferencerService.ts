@@ -1,18 +1,14 @@
+import SwaggerParser from "@apidevtools/swagger-parser"
 
-// @ts-ignore
-import * as swaggerCli from "@apidevtools/swagger-cli"
 export default class SwaggerDereferencerService {
 
-    public static async dereference(file: String): Promise<any> {
-
+    public static async dereference(spec: string): Promise<any> {
         let objJson = {}
         try {
-            const objStringJson = await swaggerCli.bundle(file, { dereference: true, type: "json" })
-            objJson = JSON.parse(objStringJson);
+            objJson = await SwaggerParser.dereference(spec)
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
-
-        return objJson;
+        return objJson
     }
 }
