@@ -26,7 +26,7 @@ export default class OpenAPIValidator {
         currentVersion = currentVersion.substring(0, currentVersion.search(/[a-zA-Z]/)).replace(/\D/g, "") || currentVersion.replace(/\D/g, "")
 
 
-        if (Number(oldVersion) < Number(currentVersion)) {
+        if (Number(oldVersion) < Number(currentVersion) || Number(oldVersion) ==  Number(currentVersion)) {
             return true
         }
         if (Number(oldVersion) > Number(currentVersion)) {
