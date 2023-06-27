@@ -12,8 +12,5 @@ export default class OpenAPIValidationHandler {
         if (!(await validator.isValidOpenAPIFormat(oldSpec)) || !(await validator.isValidOpenAPIFormat(currentSpec))) {
             throw new ValidationError("The specification provided it's not valid")
         }
-        if (!validator.hasValidVersionValues(oldSpec, currentSpec)) {
-            throw new ValidationError("The old version of the specification is not inferior to the current version");
-        }
     }
 }
