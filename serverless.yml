@@ -1,0 +1,41 @@
+app: gerador-changelog-api
+
+service: simple-rest-services
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: ${opt:stage, 'development'}
+  stackName: ${self:service}-${self:provider.stage}
+  apiName: ${self:service}-${self:provider.stage}
+  region: ${env:AWS_REGION, 'us-west-2'}
+  memorySize: 128
+  timeout: 30
+  deploymentBucket:
+    name: simple-service-${self:provider.stage}
+    serverSideEncryption: AES256
+    blockPublicAccess: true
+  environment:
+    LOG_LEVEL: debug
+# you can add packaging information here
+package:
+  exclude:
+    - tests/**
+    - documents/**
+plugins:
+  - serverless-deployment-bucket
+  - serverless-plugin-typescript
+  - serverless-offline
+  # - serverless-functions-base-path
+
+# custom:
+#   functionsBasePath: src/lambda
+functions:
+  trigger:
+    handler: lambda_handler.handler
+    events:
+      - http:
+          path: change-log
+          method: post
