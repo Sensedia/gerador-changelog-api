@@ -1,4 +1,4 @@
-POST http://localhost:3000/development/change-log   HTTP/1.1
+POST https://jn4av70lq8.execute-api.us-west-2.amazonaws.com/development/change-log   HTTP/1.1
 content-type: application/json
 
 {
