@@ -19,7 +19,7 @@ provider:
     blockPublicAccess: true
   environment:
     LOG_LEVEL: debug
-    AWS_CORS: https://andreferreiratrindade.github.io/gerador-changelog-ui/
+    AWS_CORS: '*'
 # you can add packaging information here
 package:
   exclude:
@@ -29,10 +29,7 @@ plugins:
   - serverless-deployment-bucket
   - serverless-plugin-typescript
   - serverless-offline
-  # - serverless-functions-base-path
 
-# custom:
-#   functionsBasePath: src/lambda
 functions:
   trigger:
     handler: lambda_handler.handler
@@ -42,6 +39,6 @@ functions:
           method: post
           cors:
             origins:
-              - 'https://andreferreiratrindade.github.io/gerador-changelog-ui/'
+              - '*'
             headers:
               - Content-Type
