@@ -10,13 +10,14 @@ provider:
   stage: ${opt:stage, 'development'}
   stackName: ${self:service}-${self:provider.stage}
   apiName: ${self:service}-${self:provider.stage}
-  region: ${env:AWS_REGION, 'sa-east-1'}
+  region: ${env:AWS_REGION, 'us-west-2'}
   memorySize: 128
   timeout: 30
   deploymentBucket:
-    name: changelog-service-${self:provider.stage}
+    name: ${self:provider.stage}-acme-${opt:region, self:provider.region}-deploys
     serverSideEncryption: AES256
     blockPublicAccess: true
+
   environment:
     LOG_LEVEL: debug
     AWS_CORS: '*'
