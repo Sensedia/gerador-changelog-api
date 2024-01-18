@@ -40,4 +40,8 @@ functions:
       - http:
           path: change-log
           method: post
-          cors: true
+          cors:
+            origins:
+              - 'https://andreferreiratrindade.github.io/'
+            headers:
+              - Content-Type
