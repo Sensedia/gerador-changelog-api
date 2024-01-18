@@ -19,7 +19,7 @@ provider:
     blockPublicAccess: true
   environment:
     LOG_LEVEL: debug
-    AWS_CORS: https://andreferreiratrindade.github.io/
+    AWS_CORS: https://andreferreiratrindade.github.io/gerador-changelog-ui/
 # you can add packaging information here
 package:
   exclude:
