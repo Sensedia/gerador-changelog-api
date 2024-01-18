@@ -42,6 +42,6 @@ functions:
           method: post
           cors:
             origins:
-              - 'https://andreferreiratrindade.github.io/'
+              - 'https://andreferreiratrindade.github.io/gerador-changelog-ui/'
             headers:
               - Content-Type
