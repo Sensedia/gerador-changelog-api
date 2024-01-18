@@ -40,3 +40,4 @@ functions:
       - http:
           path: change-log
           method: post
+          cors: true
