@@ -39,7 +39,7 @@ export default class CustomDescriptionChangeLogService {
             case TypeChange.removed:
                     type = "Remoção"
                     break;
-            case TypeChange.removed:
+            case TypeChange.edited:
                     type = "Alteração"
                     break;
         }
