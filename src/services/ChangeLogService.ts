@@ -17,6 +17,7 @@ export default class ChangeLogService {
             field: change.field,
             currentValue: change.valueCurrent,
             oldValue: change.valueOld,
+            changeType : CustomDescriptionChangeLogService.getChangeTypeDescription(change.typeChange),
             description: description
         }
 

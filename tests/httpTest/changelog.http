@@ -1,4 +1,4 @@
-POST https://8j5hhxm684.execute-api.us-west-2.amazonaws.com/development/change-log   HTTP/1.1
+POST https://88v16tfb0l.execute-api.sa-east-1.amazonaws.com/development/change-log   HTTP/1.1
 content-type: application/json
 
 {

@@ -7,4 +7,5 @@ export default class ChangeLogDTO {
     public oldValue?: String
     public path!: string;
     public field!: string;
+    public changeType!: string;
 }
