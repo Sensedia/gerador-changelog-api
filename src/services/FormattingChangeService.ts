@@ -15,7 +15,8 @@ export default class FormattingChangeService {
                     description: change.description,
                     currentValue: this.formatValueAsString(change.currentValue),
                     oldValue: this.formatValueAsString(change.oldValue),
-                    path: this.replaceWord(change.path.replace(changePerEndPoint.endpoint, ""))
+                    path: this.replaceWord(change.path.replace(changePerEndPoint.endpoint, "")),
+                    changeType : change.changeType
                 };
                 changeLogViewOutputList.push(changeLogViewOutputDto);
             });

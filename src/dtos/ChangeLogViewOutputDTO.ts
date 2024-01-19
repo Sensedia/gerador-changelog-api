@@ -6,4 +6,6 @@ export default class ChangeLogViewOutputDTO {
     public oldValue?: String
     public currentValue?: String
     public path!: String
+    public changeType!: string;
+
 }
