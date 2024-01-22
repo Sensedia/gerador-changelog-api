@@ -4,6 +4,7 @@ import ChangeDTO from "../dtos/ChangeDTO";
 
 export default class CustomDescriptionChangeLogService {
 
+
     public static addCustomChangeDescription(change: ChangeDTO, templateDescription?: TemplateDescriptionDTO): string {
         const { field, valueCurrent } = change;
 
@@ -27,6 +28,23 @@ export default class CustomDescriptionChangeLogService {
         description = this.addCustomDescriptionByValue(valueCurrent, description, templateRequired);
 
         return description;
+    }
+
+    public static getChangeTypeDescription(changeTypeDescription: TypeChange): string{
+        let type = "";
+        switch (changeTypeDescription) {
+            case TypeChange.added:
+                type = "Adição"
+                break;
+            case TypeChange.removed:
+                    type = "Remoção"
+                    break;
+            case TypeChange.edited:
+                    type = "Alteração"
+                    break;
+        }
+        
+        return type;
     }
 
     private static addCustomDescriptionByValue(valueCurrent: string = "", textOld: string, templateRequired?: string) {

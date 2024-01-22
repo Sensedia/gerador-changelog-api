@@ -9,7 +9,7 @@ export default class ChangeLogService {
     private createChangeLog(change: ChangeDTO, templateDescription?: TemplateDescriptionDTO): ChangeLogDTO {
 
         let description = CustomDescriptionChangeLogService.addCustomChangeDescription(change, templateDescription);
-
+        let changeTypeText = CustomDescriptionChangeLogService.getChangeTypeDescription(change.typeChange)
         let changeLog: ChangeLogDTO =
         {
             change: change,
@@ -17,6 +17,7 @@ export default class ChangeLogService {
             field: change.field,
             currentValue: change.valueCurrent,
             oldValue: change.valueOld,
+            changeType : changeTypeText,
             description: description
         }
 

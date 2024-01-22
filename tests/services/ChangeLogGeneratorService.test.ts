@@ -7,8 +7,8 @@ describe('testing ChangeLogGeneratorService file', () => {
 
     
     let changeLogGeneratorService = new  ChangeLogGeneratorService();
-    let urlOld = "https://raw.githubusercontent.com/Sensedia/draft-openapi/main/swagger-apis/resources/1.0.2.yml";
-    let urlCurrent = "https://raw.githubusercontent.com/Sensedia/draft-openapi/main/swagger-apis/resources/2.0.0.yml";
+    let urlCurrent = "https://raw.githubusercontent.com/OpenBanking-Brasil/draft-openapi/main/swagger-apis/channels/2.0.0-rc.1.yml";
+    let urlOld = "https://raw.githubusercontent.com/OpenBanking-Brasil/draft-openapi/main/swagger-apis/channels/2.0.0-beta.1.yml";
 
     let requestChangeLog = new ChangeLogRequestDTO();
     requestChangeLog.urlOld = urlOld;
