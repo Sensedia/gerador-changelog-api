@@ -6,7 +6,9 @@ import DiffCheckerService from "./DiffCheckerService";
 import FormattingChangeService from "./FormattingChangeService";
 import SwaggerDereferencerService from "./SwaggerDereferencerService";
 import SwaggerPreparationDataService from "./SwaggerPreparationDataService";
+import InfoApiFromChangeLogService from "./InfoApiFromChangeLogService";
 import TemplateDescriptionDTO from '../dtos/TemplateDescriptionDTO';
+import ResultInfoChangeDTO from "../dtos/ResultInfoChangeDTO";
 
 export default class VersionCompareService {
     private _changeLogService: ChangeLogService;
@@ -19,17 +21,9 @@ export default class VersionCompareService {
         this._formattingChangeService = new FormattingChangeService();
     }
 
-    private async getChanges(urlOld: string, urlCurrent: string, templateDescription?: TemplateDescriptionDTO): Promise<ChangeLogViewOutputDTO[]>{
-        
-        let objOld = await  SwaggerDereferencerService.dereference(urlOld);
-        let objCurrent = await SwaggerDereferencerService.dereference(urlCurrent);
+    private async getChanges(objOld: any, objCurrent: any, templateDescription?: TemplateDescriptionDTO): Promise<ChangeLogViewOutputDTO[]>{
 
-        await  new OpenAPIValidationHandler().handleValidation(objOld, objCurrent)
-
-        let objOldWithComponents =   SwaggerPreparationDataService.Prepare(objOld);
-        let objCurrentWithComponents =   SwaggerPreparationDataService.Prepare(objCurrent);
-        
-        let changes = this._diffCheckerService.getChangeDiff(objOldWithComponents, objCurrentWithComponents);
+        let changes = this._diffCheckerService.getChangeDiff(objOld, objCurrent);
         let changeLogs = this._changeLogService.getChangeLog(changes, templateDescription);
         
         let changesView = this._formattingChangeService.formatting(changeLogs);
@@ -37,11 +31,21 @@ export default class VersionCompareService {
         return changesView;
     }
 
-    public async compare(request: ChangeLogRequestDTO): Promise<ChangeLogViewOutputDTO[]> {
+    public async compare(request: ChangeLogRequestDTO): Promise<ResultInfoChangeDTO> {
         const { urlOld, urlCurrent, templateDescription } = request;
-        let changesView =  await this.getChanges(urlOld, urlCurrent, templateDescription);
 
-        return changesView;
+        let objOld = await  SwaggerDereferencerService.dereference(request.urlOld);
+        let objCurrent = await SwaggerDereferencerService.dereference(request.urlCurrent);
+
+       // await  new OpenAPIValidationHandler().handleValidation(objOld, objCurrent)
+
+        let objOldWithComponents =   SwaggerPreparationDataService.Prepare(objOld);
+        let objCurrentWithComponents =   SwaggerPreparationDataService.Prepare(objCurrent);
+
+        let changesView =  await this.getChanges(objOldWithComponents, objCurrentWithComponents, templateDescription);
+        let result  = InfoApiFromChangeLogService.getInformationAboutApis(objOldWithComponents, objCurrentWithComponents, urlOld, urlCurrent   );
+        result.changesLog = changesView;
+        return result;
     }
 
 }
