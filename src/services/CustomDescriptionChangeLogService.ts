@@ -3,61 +3,77 @@ import { TypeChange } from "../constants/Constant";
 import ChangeDTO from "../dtos/ChangeDTO";
 
 export default class CustomDescriptionChangeLogService {
+  public static REQUIRED_TEXT: string = "required";
 
+  public static addCustomChangeDescription(
+    change: ChangeDTO,
+    templateDescription?: TemplateDescriptionDTO
+  ): string {
+    const { field, valueCurrent, valueOld } = change;
 
-    public static addCustomChangeDescription(change: ChangeDTO, templateDescription?: TemplateDescriptionDTO): string {
-        const { field, valueCurrent } = change;
+    let description: string = "";
 
-        let description: string = "";
+    let { templateAdded, templateEdited, templateRemoved, templateRequired } =
+      templateDescription || {};
 
-        let { templateAdded, templateEdited, templateRemoved, templateRequired } = templateDescription || {};
+    templateAdded = this.replaceTemplateField(templateAdded, change);
+    templateEdited = this.replaceTemplateField(templateEdited, change);
+    templateRemoved = this.replaceTemplateField(templateRemoved, change);
 
-        templateAdded = this.replaceTemplateField(templateAdded, change);
-        templateEdited = this.replaceTemplateField(templateEdited, change);
-        templateRemoved = this.replaceTemplateField(templateRemoved, change);
-        
-        switch (change.typeChange) {
-            case TypeChange.added: description = templateAdded || `'${field}' adicionado;`;
-                break;
-            case TypeChange.removed: description = templateRemoved || `'${field}' removido;`
-                break;
-            case TypeChange.edited: description = templateEdited || `'${field}' alterado;`
-                break;
+    switch (change.typeChange) {
+      case TypeChange.added:
+        description = templateAdded || `'${field}' adicionado;`;
+
+        if (
+          valueCurrent == this.REQUIRED_TEXT ||
+          valueOld == this.REQUIRED_TEXT
+        ) {
+          description = `Adicionado obrigatóriedade no campo '${field}'`;
+        }
+        break;
+      case TypeChange.removed:
+        description = templateRemoved || `'${field}' removido;`;
+
+        if (
+          valueCurrent == this.REQUIRED_TEXT ||
+          valueOld == this.REQUIRED_TEXT
+        ) {
+          description = `Removido obrigatóriedade no campo '${field}'`;
         }
 
-        description = this.addCustomDescriptionByValue(valueCurrent, description, templateRequired);
-
-        return description;
+        break;
+      case TypeChange.edited:
+        description = templateEdited || `'${field}' alterado;`;
+        break;
     }
 
-    public static getChangeTypeDescription(changeTypeDescription: TypeChange): string{
-        let type = "";
-        switch (changeTypeDescription) {
-            case TypeChange.added:
-                type = "Adição"
-                break;
-            case TypeChange.removed:
-                    type = "Remoção"
-                    break;
-            case TypeChange.edited:
-                    type = "Alteração"
-                    break;
-        }
-        
-        return type;
+    return description;
+  }
+
+  public static getChangeTypeDescription(
+    changeTypeDescription: TypeChange
+  ): string {
+    let type = "";
+    switch (changeTypeDescription) {
+      case TypeChange.added:
+        type = "Adição";
+        break;
+      case TypeChange.removed:
+        type = "Remoção";
+        break;
+      case TypeChange.edited:
+        type = "Alteração";
+        break;
     }
 
-    private static addCustomDescriptionByValue(valueCurrent: string = "", textOld: string, templateRequired?: string) {
-        let description = textOld;
+    return type;
+  }
 
-        if (valueCurrent == 'required') {
-            description = templateRequired || 'Alterado mandatoriedade;';
-        }
 
-        return description;
-    }
-
-    private static replaceTemplateField(template: string | undefined, change: ChangeDTO): string | undefined {
-        return template?.replace('${field}', `${change.field}`);
-    }
+  private static replaceTemplateField(
+    template: string | undefined,
+    change: ChangeDTO
+  ): string | undefined {
+    return template?.replace("${field}", `${change.field}`);
+  }
 }
