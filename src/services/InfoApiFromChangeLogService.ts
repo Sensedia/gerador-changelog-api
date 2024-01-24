@@ -21,7 +21,7 @@ export default class InfoApiFromChangeLogService {
         {
             version: obj.info.version, 
             url: url, 
-            apiName : obj.apiName
+            apiName : "api_version"
         }
 
         return info;
