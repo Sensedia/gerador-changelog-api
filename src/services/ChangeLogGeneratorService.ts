@@ -1,5 +1,6 @@
 import ChangeLogRequestDTO from "src/dtos/ChangeLogRequestDTO";
 import VersionCompareService from "./VersionCompareService";
+import ResultInfoChangeDTO from "src/dtos/ResultInfoChangeDTO";
 
 export default class ChangeLogGeneratorService {
     private _versionCompareService: VersionCompareService;
@@ -7,12 +8,11 @@ export default class ChangeLogGeneratorService {
         this._versionCompareService = new VersionCompareService();
     }
 
-    public async GenerateChangeLogWithUrlYaml(request: ChangeLogRequestDTO): Promise<any> {
+    public async GenerateChangeLogWithUrlYaml(request: ChangeLogRequestDTO): Promise<ResultInfoChangeDTO> {
+                
 
-        let changeLogViewOutputList = await this._versionCompareService.compare(request);
+        let result = await this._versionCompareService.compare(request);
         
-        return {changesLog : changeLogViewOutputList};
-    }
-
-    
+        return result;
+    }  
 }
