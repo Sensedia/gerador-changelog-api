@@ -1,5 +1,5 @@
 import ChangeDTO from "../dtos/ChangeDTO";
-import FactoryChangeDTO from "../dtos/FactoryChangeDTO";
+import FactoryChangeDTO from "./FactoryChangeDtoService";
 
 export default class DiffCheckerService {
 

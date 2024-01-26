@@ -15,7 +15,6 @@ describe('testing ChangeLogGeneratorService file', () => {
     requestChangeLog.urlCurrent = urlCurrent;
 
     let result = await changeLogGeneratorService.GenerateChangeLogWithUrlYaml(requestChangeLog);
-    console.log(result);
     // expect(result.changesLog).toBeInstanceOf(Array)
     // expect(result.changesLog[0].field).toBe("description")
     // expect(result.changesLog[0].description).toBe("'description' alterado;")
