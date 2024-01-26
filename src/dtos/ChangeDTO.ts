@@ -6,4 +6,5 @@ export default class ChangeDTO{
     public field !: string 
     public valueOld ?:string
     public valueCurrent ?:string
+    public endpoint?:string
 }

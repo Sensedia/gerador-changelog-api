@@ -1,3 +1,4 @@
+import { TypeChange } from "src/constants/Constant"
 
 export default class ChangeLogViewOutputDTO {
     public endpoint!: String
@@ -7,5 +8,5 @@ export default class ChangeLogViewOutputDTO {
     public currentValue?: String
     public path!: String
     public changeType!: string;
-
+    public changeTypeEnum!: TypeChange;
 }
