@@ -20,11 +20,12 @@ export default class FormattingChangeService {
         let lst: any[] = [
             { from: "content/application/json; charset=utf-8", to: "" },
             { from: "application/json/", to: "" },
-            { from: "paths//", to: "" },
+            { from: "paths/", to: "" },
             { from: "/content", to: "" },
             { from: "/schema", to: "" },
             { from: "properties/", to: "" },
             { from: "application/jwt/", to: "" },
+            { from: "//", to: "/" },
         ]
 
         return lst;
