@@ -1,6 +1,6 @@
-import ChangeLogDTO from "./ChangeLogDTO";
+import ChangeLogViewOutputDTO from "./ChangeLogViewOutputDTO";
 
 export default class ChangeLogSeparatePerEndpointDTO {
     endpoint!:string
-    changeLogs: ChangeLogDTO[] = []
+    changeLogs: ChangeLogViewOutputDTO[] = []
 }

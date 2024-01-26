@@ -12,7 +12,6 @@ export const handler = async (
   context: Context
 ): Promise<APIGatewayProxyResult> => {
 
-console.log("process.env.AWS_CORS:"+ process.env.AWS_CORS)
   let changeLogGeneratorService = new ChangeLogGeneratorService();
   try{
     
