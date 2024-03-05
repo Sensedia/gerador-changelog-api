@@ -14,7 +14,6 @@ provider:
   memorySize: 128
   timeout: 30
   environment:
-    LOG_LEVEL: debug
     AWS_CORS: '*'
 # you can add packaging information here
 package:
