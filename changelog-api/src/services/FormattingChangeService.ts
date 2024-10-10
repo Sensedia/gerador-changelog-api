@@ -24,7 +24,6 @@ export default class FormattingChangeService {
             { from: "/content", to: "" },
             { from: "/schema", to: "" },
             { from: "properties/", to: "" },
-            { from: "/properties", to: "" },
             { from: "application/jwt/", to: "" },
             { from: "//", to: "/" },
         ]
