@@ -10,7 +10,7 @@
 
 
 ## 1. Iniciando a aplicação <a name="anc_1"></a>
-## Dependencias <a name="anc_1_1"></a>
+## 1.1 Dependencias <a name="anc_1_1"></a>
    -  docker  https://docs.docker.com/engine/install/
    -  docker-compose  https://docs.docker.com/compose/install/
 
