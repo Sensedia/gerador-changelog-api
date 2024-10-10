@@ -25,7 +25,7 @@ app.use('/change-log', changeLogRoute.montaRotas());
 
 app.use(ErrorMiddleware.handler)
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(port, () => console.info('App started on port -> ' + port));
